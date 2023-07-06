@@ -51,6 +51,7 @@ namespace OpenKeyboard
             //Check which keyboard profile to load in.
             string[] args = Environment.GetCommandLineArgs();
             string layoutName = (args.Length > 1) ? layoutName = args[1] : "Default";
+            layoutName = "Touch";
 
             if (!vLayout.Load(layoutName, mainContainer, this))
             {
