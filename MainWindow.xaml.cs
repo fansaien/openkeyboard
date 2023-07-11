@@ -99,7 +99,7 @@ namespace OpenKeyboard
         protected override void OnMouseRightButtonDown(MouseButtonEventArgs e)
         {
             base.OnMouseRightButtonDown(e);
-            mAppMenu.IsOpen = true; //Show context menu if user right clicks anywhere in the window.
+            //mAppMenu.IsOpen = true; //Show context menu if user right clicks anywhere in the window.
         }//func
 
         /*
@@ -145,17 +145,17 @@ namespace OpenKeyboard
             mAppMenu.Items.Add(mItem);
             mAppMenu.Items.Add(new Separator());
 
-            MenuItem itm;
-            mItem = new MenuItem() { Header = "Opacity" };
-            for (int i = 100; i >= 20; i -= 10)
-            {
-                itm = new MenuItem() { Header = i.ToString() + "%", Tag = i.ToString() };
-                itm.Click += OpacityMenu_Click;
-                mItem.Items.Add(itm);
-            }//for
+            //MenuItem itm;
+            //mItem = new MenuItem() { Header = "Opacity" };
+            //for (int i = 100; i >= 20; i -= 10)
+            //{
+            //    itm = new MenuItem() { Header = i.ToString() + "%", Tag = i.ToString() };
+            //    itm.Click += OpacityMenu_Click;
+            //    mItem.Items.Add(itm);
+            //}//for
 
-            mAppMenu.Items.Add(mItem);
-            mAppMenu.Items.Add(new Separator());
+            //mAppMenu.Items.Add(mItem);
+            //mAppMenu.Items.Add(new Separator());
         }//func
 
         private void LoadLayoutList()
@@ -167,7 +167,7 @@ namespace OpenKeyboard
             MenuItem mItem;
             var jumpList = new vJumpList() { CategoryName = "Available Layouts", AppPath = Assembly.GetEntryAssembly().Location };
 
-            for (i = 0; i < ary.Length; i++)
+            for (i = 0; i < ary.Length && false; i++)
             {
                 //Add Item to context menu
                 mItem = new MenuItem() { Header = ary[i], Tag = ary[i] };
@@ -181,5 +181,10 @@ namespace OpenKeyboard
             jumpList.Apply();
         }//for
         #endregion
+
+        private void CloseButton_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
     }//cls
 }//ns
