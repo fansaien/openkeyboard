@@ -39,7 +39,7 @@
                     <Setter Property="Background" Value="#404045"/>
                 </Trigger>
                 <Trigger Property="IsPressed" Value="true">
-                    <Setter Property="Background" Value="#FFCC0000"/>
+                    <Setter Property="Background" Value="#DC208F"/>
                 </Trigger>
             </Style.Triggers>
         </Style>
@@ -65,7 +65,7 @@
                 <RowDefinition Height="25"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
-            <Button Grid.Row="0" Width="25" HorizontalAlignment="Right" x:Name="CloseButton" Click="CloseButton_Click">X</Button>
+            <Button Visibility="Collapsed" Grid.Row="0" Width="25" HorizontalAlignment="Right" x:Name="CloseButton" Click="CloseButton_Click">X</Button>
             <Grid Grid.Row="1" Name="mainContainer" Margin="6,10,6,6"></Grid>
         </Grid>
         
