@@ -74,6 +74,7 @@ namespace OpenKeyboard
         bool inDrag = false;
         Point anchorPoint;
 
+
         protected override void OnMouseLeftButtonDown(MouseButtonEventArgs e)
         {
             anchorPoint = PointToScreen(e.GetPosition(this));
@@ -91,8 +92,14 @@ namespace OpenKeyboard
                 Top = Top + currentPoint.Y - anchorPoint.Y;
                 anchorPoint = currentPoint;
             }
-            
-            RefreshButton.Invoke(vKeyboard.isShiftActive || System.Windows.Forms.Control.IsKeyLocked(System.Windows.Forms.Keys.CapsLock));
+
+            //RefreshButton.Invoke(vKeyboard.isShiftActive || System.Windows.Forms.Control.IsKeyLocked(System.Windows.Forms.Keys.CapsLock));
+        }
+
+        public void RefreshButtons()
+        {
+            bool toUpper = vKeyboard.isShiftActive ||  Keyboard.IsKeyToggled(Key.CapsLock);
+            RefreshButton.Invoke(toUpper);
         }
 
         protected override void OnMouseLeftButtonUp(MouseButtonEventArgs e)

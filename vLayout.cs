@@ -134,7 +134,7 @@ namespace OpenKeyboard
 
                         rGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(gLen, GridUnitType.Star) });
 
-                        var button = CreateButton(key, iKey);
+                        var button = CreateButton(key, iKey, uiWindow);
 
                         ((MainWindow)uiWindow).RefreshButton += button.RefreshButton;
 
@@ -161,7 +161,7 @@ namespace OpenKeyboard
             return grid;
         }//func
 
-        private static vButton CreateButton(XmlElement elm, int col)
+        private static vButton CreateButton(XmlElement elm, int col, Window uiWindow)
         {
             string code, shCode, shText
                 , title = elm.GetAttribute("text")
@@ -194,6 +194,11 @@ namespace OpenKeyboard
                     btn.KBCommand.shSendString = elm.GetAttribute("shstring");
 
                     btn.PreviewMouseLeftButtonDown += BtnTouch_Down;
+                    btn.PreviewMouseLeftButtonDown += (sender, e) =>
+                    {
+                        //todo: shift or capslock clicked
+                        ((MainWindow)uiWindow).RefreshButtons();
+                    };
                     btn.PreviewMouseLeftButtonUp += BtnTouch_Up;
 
                     break;
@@ -226,8 +231,15 @@ namespace OpenKeyboard
         }//func
 
         //public static void OnButtonPress(Object sender, RoutedEventArgs e) { vKeyboard.ProcessCommand((sender as vButton).KBCommand); }//func
-        private static void BtnTouch_Down(Object sender, EventArgs e) { KeyLoopHandler.BeginKeypress((sender as vButton).KBCommand); }//func
-        private static void BtnTouch_Up(Object sender, EventArgs e) { KeyLoopHandler.EndKeypress(); }//func
+        private static void BtnTouch_Down(Object sender, EventArgs e) 
+        { 
+            KeyLoopHandler.BeginKeypress((sender as vButton).KBCommand); 
+        
+        }//func
+        private static void BtnTouch_Up(Object sender, EventArgs e) 
+        { 
+            KeyLoopHandler.EndKeypress(); 
+        }//func
 
         public static void OnMenuClick(object sender, RoutedEventArgs e) { vKeyboard.ProcessCommand((KeyboardCommand)(sender as MenuItem).Tag); }
         public static void OnMenuButtonPress(Object sender, RoutedEventArgs e) { (sender as vButton).ContextMenu.IsOpen = true; }//func
