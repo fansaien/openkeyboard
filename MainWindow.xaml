@@ -25,7 +25,7 @@
                     <ControlTemplate TargetType="{x:Type ok:vButton}">
                         <Grid>
                             <Rectangle x:Name="BtnBackground" Fill="{TemplateBinding Background}" RadiusX="10" RadiusY="10" />
-                            <TextBlock x:Name="ShiftText" FontSize="19" Foreground="Gray" Margin="0,0,5,3" HorizontalAlignment="Right" VerticalAlignment="Bottom" Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ShiftText}"/>
+                            <TextBlock x:Name="ShiftText" FontSize="19" Foreground="Gray" Margin="0,0,5,3" HorizontalAlignment="Right" VerticalAlignment="Bottom" Text="{TemplateBinding ShiftText}"/>
                             <ContentPresenter x:Name="BtnContent" VerticalAlignment="center" HorizontalAlignment="center" Content="{TemplateBinding Content}"/>
                         </Grid>
                     </ControlTemplate>

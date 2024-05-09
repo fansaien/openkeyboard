@@ -9,24 +9,41 @@ namespace OpenKeyboard
     {
         public KeyboardCommand KBCommand;
 
+        private string defaultText = "";
+        private string shiftTextValue = "";
+
         // Dependency Property
-        public static DependencyProperty ShiftTextProperty = DependencyProperty.Register("ShiftText", typeof(string), typeof(TextBlock), new FrameworkPropertyMetadata(""));
+        public static readonly DependencyProperty ShiftTextProperty = DependencyProperty.Register("ShiftText", typeof(string), typeof(vButton), new FrameworkPropertyMetadata(""));
         public string ShiftText
         {
             get { return (string)this.GetValue(ShiftTextProperty); }
-            set { this.SetValue(ShiftTextProperty, value); }
+            set
+            {
+                this.SetValue(ShiftTextProperty, value);
+                if (string.IsNullOrEmpty(shiftTextValue))
+                {
+                    shiftTextValue = value;
+                }
+            }
         }//prop
 
         public string Title
         {
             set
             {
-                if (value.StartsWith("\\u")) parseUnicode(value);
-                else Content = value;
+                if (value.StartsWith("\\u"))
+                {
+                    defaultText = parseUnicode(value);
+                }
+                else
+                {
+                    defaultText = value;
+                    Content = value;
+                }
             }
         }//prop
 
-        private void parseUnicode(string txt)
+        private string parseUnicode(string txt)
         {
             int pos = 0;
             string tmp = "", final = "";
@@ -35,7 +52,7 @@ namespace OpenKeyboard
             if (txt.Length == 6)
             {
                 Content = (char)Int32.Parse(txt.Substring(2), System.Globalization.NumberStyles.HexNumber);
-                return;
+                return Content.ToString();
             }//if
 
             //More then one possible unicode characters
@@ -52,14 +69,26 @@ namespace OpenKeyboard
             }//while
 
             Content = final;
+            return final;
         }//func
 
         public void RefreshButton(bool toUpper)
         {
+
+
+            if (!string.IsNullOrEmpty(ShiftText))
+            {
+                Content = toUpper ? shiftTextValue : defaultText;
+                ShiftText = toUpper ? defaultText : shiftTextValue;
+                return;
+            }
+
             var txt = Content as string;
 
-            if (txt.Length == 1)
+            if (txt.Length == 1 && char.IsLetter(txt[0]))
                 Content = toUpper ? txt.ToUpper() : txt.ToLower();
+
+
         }
     }//cls
 }//ns

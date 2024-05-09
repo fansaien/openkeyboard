@@ -134,7 +134,7 @@ namespace OpenKeyboard
 
                         rGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(gLen, GridUnitType.Star) });
 
-                        var button = CreateButton(key, iKey);
+                        var button = CreateButton(key, iKey, uiWindow);
 
                         ((MainWindow)uiWindow).RefreshButton += button.RefreshButton;
 
@@ -161,7 +161,7 @@ namespace OpenKeyboard
             return grid;
         }//func
 
-        private static vButton CreateButton(XmlElement elm, int col)
+        private static vButton CreateButton(XmlElement elm, int col, Window uiWindow)
         {
             string code, shCode, shText
                 , title = elm.GetAttribute("text")
@@ -194,6 +194,10 @@ namespace OpenKeyboard
                     btn.KBCommand.shSendString = elm.GetAttribute("shstring");
 
                     btn.PreviewMouseLeftButtonDown += BtnTouch_Down;
+                    btn.PreviewMouseLeftButtonDown += (sender, e) =>
+                    {
+                        ((MainWindow)uiWindow).RefreshButtons();
+                    };
                     btn.PreviewMouseLeftButtonUp += BtnTouch_Up;
 
                     break;
