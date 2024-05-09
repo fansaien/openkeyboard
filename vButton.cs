@@ -86,20 +86,11 @@ namespace OpenKeyboard
 
             var txt = Content as string;
 
-            if (txt.Length == 1)
+            if (txt.Length == 1 && char.IsLetter(txt[0]))
                 Content = toUpper ? txt.ToUpper() : txt.ToLower();
 
             
         }
 
-        static vButton()
-        {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(vButton), new FrameworkPropertyMetadata(typeof(vButton)));
-        }
-
-        protected override void OnMouseDown(MouseButtonEventArgs e)
-        {
-            base.OnApplyTemplate();
-        }
     }//cls
 }//ns
