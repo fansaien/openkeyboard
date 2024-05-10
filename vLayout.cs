@@ -196,7 +196,6 @@ namespace OpenKeyboard
                     btn.PreviewMouseLeftButtonDown += BtnTouch_Down;
                     btn.PreviewMouseLeftButtonDown += (sender, e) =>
                     {
-                        //todo: shift or capslock clicked
                         ((MainWindow)uiWindow).RefreshButtons();
                     };
                     btn.PreviewMouseLeftButtonUp += BtnTouch_Up;

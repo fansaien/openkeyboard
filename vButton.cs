@@ -13,6 +13,7 @@ namespace OpenKeyboard
         private string defaultText = "";
         private string shiftTextValue = "";
 
+
         // Dependency Property
         public static readonly DependencyProperty ShiftTextProperty = DependencyProperty.Register("ShiftText", typeof(string), typeof(vButton), new FrameworkPropertyMetadata(""));
         public string ShiftText
@@ -73,20 +74,21 @@ namespace OpenKeyboard
             return final;
         }//func
 
-        public void RefreshButton(bool toUpper)
+        public void RefreshButton(bool isShiftPressed, bool isCapsLockOn)
         {
 
 
             if (!string.IsNullOrEmpty(ShiftText))
             {
-                Content = toUpper ? shiftTextValue : defaultText;
-                ShiftText = toUpper ? defaultText : shiftTextValue;
-                return;
+                Content = isShiftPressed ? shiftTextValue : defaultText;
+                ShiftText = isShiftPressed ? defaultText : shiftTextValue;
             }
+
+            bool toUpper = isCapsLockOn ^ isShiftPressed;
 
             var txt = Content as string;
 
-            if (txt.Length == 1 && char.IsLetter(txt[0]))
+            if (txt.Length == 1)
                 Content = toUpper ? txt.ToUpper() : txt.ToLower();
 
             

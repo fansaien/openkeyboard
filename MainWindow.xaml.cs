@@ -15,7 +15,7 @@ using System.Windows.Interop;
 
 namespace OpenKeyboard
 {
-    public delegate void RefreshButton(bool toUpper);
+    public delegate void RefreshButton(bool isShiftPressed, bool isCapsLockOn);
     public partial class MainWindow : Window
     {
         private WindowController mWinController = null;
@@ -92,14 +92,14 @@ namespace OpenKeyboard
                 Top = Top + currentPoint.Y - anchorPoint.Y;
                 anchorPoint = currentPoint;
             }
-
-            //RefreshButton.Invoke(vKeyboard.isShiftActive || System.Windows.Forms.Control.IsKeyLocked(System.Windows.Forms.Keys.CapsLock));
+            
         }
 
         public void RefreshButtons()
         {
-            bool toUpper = vKeyboard.isShiftActive ||  Keyboard.IsKeyToggled(Key.CapsLock);
-            RefreshButton.Invoke(toUpper);
+            bool isCapsLockOn = Keyboard.IsKeyToggled(Key.CapsLock);
+            bool isShiftPressed = vKeyboard.isShiftActive;
+            RefreshButton.Invoke(isShiftPressed, isCapsLockOn);
         }
 
         protected override void OnMouseLeftButtonUp(MouseButtonEventArgs e)
