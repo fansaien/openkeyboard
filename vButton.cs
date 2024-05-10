@@ -79,25 +79,21 @@ namespace OpenKeyboard
 
             var txt = Content as string;
 
+            if (string.IsNullOrEmpty(txt)) return;
+
             bool hasShiftText = !string.IsNullOrEmpty(ShiftText);
 
-            if (txt.Length == 1)
+            bool isLetter = txt.Length == 1 && char.IsLetter(txt[0]);
+
+            if (hasShiftText)
             {
-                if (hasShiftText)
-                {
-                    Content = toUpper ? shiftTextValue : defaultText;
-                    ShiftText = toUpper ? defaultText : shiftTextValue;
-                }else
-                {
-                    Content = toUpper ? txt.ToUpper() : txt.ToLower();
-                }
-            }else
+                bool useShiftText = isLetter ? toUpper : isShiftPressed;
+                Content = useShiftText ? shiftTextValue : defaultText;
+                ShiftText = useShiftText ? defaultText : shiftTextValue;
+            }
+            else if (isLetter)
             {
-                if (hasShiftText)
-                {
-                    Content = isShiftPressed ? shiftTextValue : defaultText;
-                    ShiftText = isShiftPressed ? defaultText : shiftTextValue;
-                }
+                Content = toUpper ? txt.ToUpper() : txt.ToLower();
             }
 
         }
