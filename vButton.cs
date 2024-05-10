@@ -77,21 +77,27 @@ namespace OpenKeyboard
         public void RefreshButton(bool isShiftPressed, bool isCapsLockOn)
         {
 
-
-            if (!string.IsNullOrEmpty(ShiftText))
-            {
-                Content = isShiftPressed ? shiftTextValue : defaultText;
-                ShiftText = isShiftPressed ? defaultText : shiftTextValue;
-            }
-
             bool toUpper = isCapsLockOn ^ isShiftPressed;
 
             var txt = Content as string;
 
-            if (txt.Length == 1)
-                Content = toUpper ? txt.ToUpper() : txt.ToLower();
+            if (string.IsNullOrEmpty(txt)) return;
 
-            
+            bool hasShiftText = !string.IsNullOrEmpty(ShiftText);
+
+            bool isLetter = txt.Length == 1 && char.IsLetter(txt[0]);
+
+            if (hasShiftText)
+            {
+                bool useShiftText = isLetter ? toUpper : isShiftPressed;
+                Content = useShiftText ? shiftTextValue : defaultText;
+                ShiftText = useShiftText ? defaultText : shiftTextValue;
+            }
+            else if (isLetter)
+            {
+                Content = toUpper ? txt.ToUpper() : txt.ToLower();
+            }
+
         }
 
     }//cls

@@ -12,8 +12,8 @@
 	  <key code="8" text="8" shcode="{*}" shtext="*"/>
 	  <key code="9" text="9" shcode="{(}" shtext="("/>
 	  <key code="0" text="0" shcode="{)}" shtext=")"/>
-    <key code="OEMMINUS" text="-" shtext="_"/>
-	  <key code="BACKSPACE" text="Back"/>
+	  <key code="OEMMINUS" text="-" shtext="_"/>
+	  <key code="BACKSPACE" text="Back" weight="1.5"/>
 	</row>
 
 	<row>
