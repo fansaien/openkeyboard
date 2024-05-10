@@ -72,16 +72,18 @@ namespace OpenKeyboard
             return final;
         }//func
 
-        public void RefreshButton(bool toUpper)
+        public void RefreshButton(bool isShiftPressed, bool isCapsLockOn)
         {
 
 
             if (!string.IsNullOrEmpty(ShiftText))
             {
-                Content = toUpper ? shiftTextValue : defaultText;
-                ShiftText = toUpper ? defaultText : shiftTextValue;
+                Content = isShiftPressed ? shiftTextValue : defaultText;
+                ShiftText = isShiftPressed ? defaultText : shiftTextValue;
                 return;
             }
+
+            bool toUpper = isCapsLockOn ^ isShiftPressed;
 
             var txt = Content as string;
 
