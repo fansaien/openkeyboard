@@ -18,7 +18,7 @@ namespace OpenKeyboard
     {
         public static FontFamily mIconFont = new FontFamily(new Uri("pack://application:,,,/fonts/#FontAwesome"), "./#FontAwesome");
 
-        public static double defaultfsize = 17;
+        public static double defaultfsize = 20;
 
         [DllImport("user32.dll")]
         [return: MarshalAs(UnmanagedType.Bool)]
