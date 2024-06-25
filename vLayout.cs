@@ -66,7 +66,7 @@ namespace OpenKeyboard
                         break;
                     case "top": uiWindow.Top = 20; break;
                     case "center": uiWindow.Top = (sHeight - uiWindow.Height) / 2; break;
-                    case "bottom": uiWindow.Top = sHeight - uiWindow.Height - 20; break;
+                    case "bottom": uiWindow.Top = sHeight - uiWindow.Height - 60; break;
                 }//switch
 
                 switch (root.GetAttribute("hpos"))
